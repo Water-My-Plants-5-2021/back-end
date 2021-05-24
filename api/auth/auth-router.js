@@ -2,9 +2,9 @@ const router = require("express").Router()
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const auth = require("../users/users-model")
-const { checkUsernameExists } = require("./auth-middleware")
+const { checkUsernameExists, usernameUnique } = require("./auth-middleware")
 
-router.post("/api/register", async (req, res, next) => {
+router.post("/api/register", usernameUnique, async (req, res, next) => {
     try{
         const {username, password, phoneNumber} = req.body;
         const newUser = await auth.add({

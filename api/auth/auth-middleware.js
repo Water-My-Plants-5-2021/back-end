@@ -13,6 +13,18 @@ const checkUsernameExists = async (req, res, next) => {
    }
 }
 
+const usernameUnique = async (req, res, next) => {
+  const { username } = req.body
+  const existingUser = await findBy({username});
+  if(existingUser){
+    res.status(400).json({
+     message: "Username taken!"
+    })
+  }else{
+    next()
+  }
+}
 module.exports = {
-    checkUsernameExists
+    checkUsernameExists,
+    usernameUnique
 }
