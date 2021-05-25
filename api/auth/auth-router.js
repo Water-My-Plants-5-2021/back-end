@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken")
 const auth = require("../users/users-model")
 const { checkUsernameExists, usernameUnique } = require("./auth-middleware")
 
-router.post("/api/register", usernameUnique, async (req, res, next) => {
+router.post("/register", usernameUnique, async (req, res, next) => {
     try{
         const {username, password, phoneNumber} = req.body;
         const newUser = await auth.add({
@@ -18,7 +18,7 @@ router.post("/api/register", usernameUnique, async (req, res, next) => {
     }
 })
 
-router.post("/api/login", checkUsernameExists, async (req, res, next) => {
+router.post("/login", checkUsernameExists, async (req, res, next) => {
     try{
         const { password } = req.body
         const user = req.user
@@ -28,17 +28,20 @@ router.post("/api/login", checkUsernameExists, async (req, res, next) => {
           return res.status(401).json({
             message: "Invalid Credentials",
           })
-        }
-        const token = jwt.sign({
+        }else{
+          const token = jwt.sign({
             user_id: user.user_id,
             username: user.username,
+            phoneNumber: user.phoneNumber
           }, process.env.SECRET, { expiresIn: '24h'})
       
           res.cookie("token", token)
           res.json({
-            message: `${user.username} is back!`,
+            username: user.username,
+            phoneNumber: user.phoneNumber,
             token: token
           })
+        }
     }catch(err){
         next(err)
     }

@@ -24,6 +24,7 @@ const usernameUnique = async (req, res, next) => {
     next()
   }
 }
+
 module.exports = {
     checkUsernameExists,
     usernameUnique

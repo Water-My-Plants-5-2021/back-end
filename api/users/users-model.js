@@ -9,9 +9,21 @@ function findBy(filter) {
       return db("users as u")
       .where(filter)
       .first("u.user_id", "u.username", "u.password", "u.phoneNumber")
-  }
+}
+
+function update(user_id, changes) {
+  return db('users as u')
+    .where({ user_id })
+    .returning(["u.username", "u.phoneNumber"])
+    .update({
+      username: changes.username,
+      password: changes.password,
+      phoneNumber: changes.phoneNumber
+    })
+}
 
 module.exports = {
     add,
-    findBy
+    findBy,
+    update
 }
