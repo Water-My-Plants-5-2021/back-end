@@ -12,7 +12,11 @@ router.post("/register", usernameUnique, async (req, res, next) => {
             password: await bcrypt.hash(password, 1),
             phoneNumber
         })
-        res.status(201).json(newUser)
+        const User = newUser[0]
+        res.status(201).json({
+          username: User.username,
+          phoneNumber: User.phoneNumber
+        })
     }catch(err){
         next(err)
     }
