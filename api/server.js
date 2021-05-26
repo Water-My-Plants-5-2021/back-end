@@ -5,6 +5,7 @@ const cors = require('cors')
 const cookieParser = require("cookie-parser")
 const authRouter = require("./auth/auth-router")
 const usersRouter = require("./users/users-router")
+const plantsRouter = require("./plants/plants-router")
 const db = require("./sample/sample-model")
 
 server.use(helmet())
@@ -14,6 +15,7 @@ server.use(cookieParser())
 
 server.use("/api", authRouter)
 server.use("/api/account", usersRouter)
+server.use("/api/plants", plantsRouter)
 
 server.get("/sample", async (req, res, next) => {
     try{
