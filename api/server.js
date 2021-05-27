@@ -8,8 +8,7 @@ const usersRouter = require("./users/users-router")
 const plantsRouter = require("./plants/plants-router")
 const db = require("./sample/sample-model")
 const config = {
-    origin: 'http://localhost:3000',
-    credentials: true
+    origin: "*"
 };
 server.use(cors(config));
 server.use(helmet())
