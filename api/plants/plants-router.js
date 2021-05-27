@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require("./plants-model")
 const { restricted } = require("../users/users-middleware")
 
-router.post("/", restricted, async (res, req, next) => {
+router.post("/", async (res, req, next) => {
     try{
         const { user_id } = req.req.token
         const { nickname, species, h2oFrequency, image } = req.req.body
@@ -22,7 +22,7 @@ router.post("/", restricted, async (res, req, next) => {
     }
 })
 
-router.get("/", restricted, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     try{
         const { user_id } = req.token
         const plants = await db.get({user_id});
@@ -32,7 +32,7 @@ router.get("/", restricted, async (req, res, next) => {
     }
 })
 
-router.get("/:plant_id", restricted, async (req, res, next) => {
+router.get("/:plant_id", async (req, res, next) => {
     try{
         const { plant_id } = req.params
         const plant = await db.get({plant_id});
