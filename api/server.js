@@ -7,15 +7,20 @@ const authRouter = require("./auth/auth-router")
 const usersRouter = require("./users/users-router")
 const plantsRouter = require("./plants/plants-router")
 const db = require("./sample/sample-model")
-
+const config = {
+    origin: '*',
+    credentials: true,
+};
+server.use(cors(config));
 server.use(helmet())
-server.use(cors())
 server.use(express.json())
 server.use(cookieParser())
 
 server.use("/api", authRouter)
 server.use("/api/account", usersRouter)
 server.use("/api/plants", plantsRouter)
+
+
 
 server.get("/sample", async (req, res, next) => {
     try{
