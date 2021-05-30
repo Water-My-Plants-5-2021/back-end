@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser")
 const authRouter = require("./auth/auth-router")
 const usersRouter = require("./users/users-router")
 const plantsRouter = require("./plants/plants-router")
+const plants2Router = require("./sample/sample-router")
 const db = require("./sample/sample-model")
 const config = {
     origin: "http://localhost:3000",
@@ -20,6 +21,7 @@ server.use(cookieParser())
 server.use("/api", authRouter)
 server.use("/api/account", usersRouter)
 server.use("/api/plants", plantsRouter)
+server.use("/api2/plants", plants2Router)
 
 
 
