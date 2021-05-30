@@ -9,8 +9,7 @@ const plantsRouter = require("./plants/plants-router")
 const plants2Router = require("./sample/sample-router")
 const db = require("./sample/sample-model")
 const config = {
-    origin: "http://localhost:3000",
-    credentials: true
+    origin: "*"
 };
 
 server.use(helmet())

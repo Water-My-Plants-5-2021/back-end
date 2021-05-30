@@ -14,6 +14,13 @@ exports.up = async (knex) => {
       plants.string('image').defaultTo(`https://i.picsum.photos/id/106/200/200.jpg?hmac=buP7QPRJ18uSC5niV6HaCXgnkrp01jx5H_5w_3CUx9c`)
       plants.integer('user_id').unsigned().notNullable().references('user_id').inTable('users').onUpdate("CASCADE").onDelete("CASCADE");
     })
+    .createTable('sample', (plants) => {
+      plants.increments('plant_id')
+      plants.string('nickname').notNullable()
+      plants.string('species').notNullable()
+      plants.string('h2oFrequency').notNullable()
+      plants.string('image').defaultTo(`https://i.picsum.photos/id/106/200/200.jpg?hmac=buP7QPRJ18uSC5niV6HaCXgnkrp01jx5H_5w_3CUx9c`)
+    })
 }
 
 exports.down = async (knex) => {

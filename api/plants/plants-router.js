@@ -2,14 +2,6 @@ const express = require("express")
 const router = express.Router()
 const db = require("./plants-model")
 const { restricted } = require("../users/users-middleware")
-const cors = require("cors")
-
-const config = {
-    origin: "http://localhost:3000",
-    credentials: true
-};
-
-router.use(cors(config))
 
 router.post("/", restricted, async (res, req, next) => {
     try{
