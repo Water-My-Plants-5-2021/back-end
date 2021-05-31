@@ -1,6 +1,9 @@
 const request = require('supertest')
 const server = require('../server')
 const db = require('../data/db-config')
+const supertest = require("supertest")
+const testUser = { username: "user", password: "pass"}
+const testUserInvalid = { username: "user" }
 
 beforeAll(async () => {
   await db.migrate.rollback()
