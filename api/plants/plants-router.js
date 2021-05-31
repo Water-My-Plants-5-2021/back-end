@@ -42,4 +42,30 @@ router.get("/:plant_id", restricted, async (req, res, next) => {
     }
 })
 
+router.put("/:plant_id", restricted, async (req, res, next) => {
+    try{
+        const { plant_id } = req.params
+        const {nickname, species, h2oFrequency, image} = req.body
+        const plant = await db.update(plant_id, {
+            nickname: nickname,
+            species: species,
+            h2oFrequency: h2oFrequency,
+            image: image
+        });
+        res.json(plant[0])
+    }catch(err){
+        next(err)
+    }
+})
+
+router.delete("/:plant_id", async (req, res, next) => {
+    try{
+        const { plant_id } = req.params
+        const plant = await db.remove(plant_id)
+        res.end()
+    }catch(err){
+        next(err)
+    }
+})
+
 module.exports = router;

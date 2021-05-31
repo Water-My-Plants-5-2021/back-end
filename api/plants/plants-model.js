@@ -12,8 +12,27 @@ function get(filter){
     .select("plant_id", "nickname", "species", "h2oFrequency", "image")
 }
 
-//function 
+function update(id, newPlant){
+    return db("plants")
+    .where({plant_id : id})
+    .returning(["plant_id", "nickname", "species", "h2oFrequency", "image"])
+    .update({
+        nickname: newPlant.nickname,
+        species: newPlant.species,
+        h2oFrequency: newPlant.h2oFrequency,
+        image: newPlant.image
+    })
+}
+
+function remove(id){
+    return db("plants")
+    .where({plant_id : id})
+    .del()
+}
+
 module.exports = {
     insert,
-    get
+    get,
+    update,
+    remove
 }
